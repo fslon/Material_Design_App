@@ -3,10 +3,7 @@ package ru.geekbrains.materialdesignapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -45,71 +42,96 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-
+//        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        setBottomAppBar(view)
     }
 
-    private fun renderData(data: PictureOfTheDayData) {
-        when (data) {
-            is PictureOfTheDayData.Success -> {
-                val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
-                val explanation = serverResponseData.explanation
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.bottom_app_bar_menu, menu)
+    }
 
-                if (url.isNullOrEmpty()) {
-                    toast("Link is empty")//Отобразите ошибку
-                    // showError("Сообщение, что ссылка пустая")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings -> {
+                activity?.let {
 
-                } else {
+                    Toast.makeText(context, "Settings pressed", Toast.LENGTH_SHORT).show()
 
-                    binding.imageView.load(url) {
-                        lifecycle(this@PictureOfTheDayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-                        crossfade(true)
-                    }
-
-                    setExplanation(explanation) // добавление описания для фото в bottomSheet
                 }
             }
-            is PictureOfTheDayData.Loading -> {
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+        private fun setBottomAppBar(view: View) {
+            val context = activity as MainActivity
+            context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+            setHasOptionsMenu(true)
+        }
+
+
+        private fun renderData(data: PictureOfTheDayData) {
+            when (data) {
+                is PictureOfTheDayData.Success -> {
+                    val serverResponseData = data.serverResponseData
+                    val url = serverResponseData.url
+                    val explanation = serverResponseData.explanation
+
+                    if (url.isNullOrEmpty()) {
+                        toast("Link is empty")//Отобразите ошибку
+                        // showError("Сообщение, что ссылка пустая")
+
+                    } else {
+
+                        binding.imageView.load(url) {
+                            lifecycle(this@PictureOfTheDayFragment)
+                            error(R.drawable.ic_load_error_vector)
+                            placeholder(R.drawable.ic_no_photo_vector)
+                            crossfade(true)
+                        }
+
+                        setExplanation(explanation) // добавление описания для фото в bottomSheet
+                    }
+                }
+                is PictureOfTheDayData.Loading -> {
 //Отобразите загрузку
 //showLoading()
-            }
-            is PictureOfTheDayData.Error -> {
+                }
+                is PictureOfTheDayData.Error -> {
 //Отобразите ошибку
 //showError(data.error.message)
-                toast(data.error.message)
+                    toast(data.error.message)
+                }
+            }
+
+        }
+
+        private fun setExplanation(explanation: String?) {
+            val view: ConstraintLayout? = view?.findViewById(R.id.bottom_sheet_container)
+            view?.findViewById<TextView>(R.id.bottomSheetDescription)?.text = explanation
+        }
+
+        private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+            bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+
+        private fun Fragment.toast(string: String?) {
+            Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
+                setGravity(Gravity.BOTTOM, 0, 250)
+                show()
             }
         }
 
-    }
 
-    private fun setExplanation(explanation: String?) {
-      val view : ConstraintLayout? =  view?.findViewById(R.id.bottom_sheet_container)
-        view?.findViewById<TextView>(R.id.bottomSheetDescription)?.text = explanation
-    }
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
 
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
-
-    private fun Fragment.toast(string: String?) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-            setGravity(Gravity.BOTTOM, 0, 250)
-            show()
+        companion object {
+            fun newInstance() = PictureOfTheDayFragment()
         }
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    companion object {
-        fun newInstance() = PictureOfTheDayFragment()
-    }
-}
