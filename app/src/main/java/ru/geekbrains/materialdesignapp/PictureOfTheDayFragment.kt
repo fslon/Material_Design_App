@@ -54,84 +54,85 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settings -> {
-                activity?.let {
 
-                    Toast.makeText(context, "Settings pressed", Toast.LENGTH_SHORT).show()
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack("")
+                    ?.commit()
 
-                }
+
+//                activity.supportFragmentManager.beginTransaction().replace(R.id.container, settingsFragment).commitAllowingStateLoss()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-        private fun setBottomAppBar(view: View) {
-            val context = activity as MainActivity
-            context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-            setHasOptionsMenu(true)
-        }
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
+    }
 
 
-        private fun renderData(data: PictureOfTheDayData) {
-            when (data) {
-                is PictureOfTheDayData.Success -> {
-                    val serverResponseData = data.serverResponseData
-                    val url = serverResponseData.url
-                    val explanation = serverResponseData.explanation
+    private fun renderData(data: PictureOfTheDayData) {
+        when (data) {
+            is PictureOfTheDayData.Success -> {
+                val serverResponseData = data.serverResponseData
+                val url = serverResponseData.url
+                val explanation = serverResponseData.explanation
 
-                    if (url.isNullOrEmpty()) {
-                        toast("Link is empty")//Отобразите ошибку
-                        // showError("Сообщение, что ссылка пустая")
+                if (url.isNullOrEmpty()) {
+                    toast("Link is empty")//Отобразите ошибку
+                    // showError("Сообщение, что ссылка пустая")
 
-                    } else {
+                } else {
 
-                        binding.imageView.load(url) {
-                            lifecycle(this@PictureOfTheDayFragment)
-                            error(R.drawable.ic_load_error_vector)
-                            placeholder(R.drawable.ic_no_photo_vector)
-                            crossfade(true)
-                        }
-
-                        setExplanation(explanation) // добавление описания для фото в bottomSheet
+                    binding.imageView.load(url) {
+                        lifecycle(this@PictureOfTheDayFragment)
+                        error(R.drawable.ic_load_error_vector)
+                        placeholder(R.drawable.ic_no_photo_vector)
+                        crossfade(true)
                     }
+
+                    setExplanation(explanation) // добавление описания для фото в bottomSheet
                 }
-                is PictureOfTheDayData.Loading -> {
+            }
+            is PictureOfTheDayData.Loading -> {
 //Отобразите загрузку
 //showLoading()
-                }
-                is PictureOfTheDayData.Error -> {
+            }
+            is PictureOfTheDayData.Error -> {
 //Отобразите ошибку
 //showError(data.error.message)
-                    toast(data.error.message)
-                }
-            }
-
-        }
-
-        private fun setExplanation(explanation: String?) {
-            val view: ConstraintLayout? = view?.findViewById(R.id.bottom_sheet_container)
-            view?.findViewById<TextView>(R.id.bottomSheetDescription)?.text = explanation
-        }
-
-        private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-            bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
-
-
-        private fun Fragment.toast(string: String?) {
-            Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-                setGravity(Gravity.BOTTOM, 0, 250)
-                show()
+                toast(data.error.message)
             }
         }
 
+    }
 
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    private fun setExplanation(explanation: String?) {
+        val view: ConstraintLayout? = view?.findViewById(R.id.bottom_sheet_container)
+        view?.findViewById<TextView>(R.id.bottomSheetDescription)?.text = explanation
+    }
 
-        companion object {
-            fun newInstance() = PictureOfTheDayFragment()
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+
+    private fun Fragment.toast(string: String?) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
+            setGravity(Gravity.BOTTOM, 0, 250)
+            show()
         }
     }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        fun newInstance() = PictureOfTheDayFragment()
+    }
+}
