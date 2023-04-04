@@ -39,7 +39,12 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
+
 }
 
 dependencies {
@@ -65,5 +70,7 @@ dependencies {
 //Coil image download
     implementation 'io.coil-kt:coil:1.4.0'
 
+    implementation "androidx.compose.material3:material3:1.0.1"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 
 }
