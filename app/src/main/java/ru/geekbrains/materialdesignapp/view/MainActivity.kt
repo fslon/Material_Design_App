@@ -1,14 +1,23 @@
-package ru.geekbrains.materialdesignapp
+package ru.geekbrains.materialdesignapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.ActivityMainBinding
-import java.io.File
+import ru.geekbrains.materialdesignapp.viewmodel.ThemeViewModel
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val themeViewModel = ViewModelProvider(this).get(ThemeViewModel::class.java)
+        // Установка темы приложения
+        setTheme(themeViewModel.getSelectedTheme())
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
@@ -16,5 +25,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance())
                 .commitNow()
         }
-    }
-}
+
+
+    }}

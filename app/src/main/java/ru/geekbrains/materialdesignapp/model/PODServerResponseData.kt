@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp
+package ru.geekbrains.materialdesignapp.model
 
 import com.google.gson.annotations.SerializedName
 

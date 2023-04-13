@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp
+package ru.geekbrains.materialdesignapp.view
 
 import android.content.Context
 import android.util.AttributeSet

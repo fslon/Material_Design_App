@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.geekbrains.materialdesignapp.model.PODRetrofitImpl
+import ru.geekbrains.materialdesignapp.model.PODServerResponseData
+import ru.geekbrains.materialdesignapp.model.PictureOfTheDayData
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> =

@@ -3,6 +3,7 @@
 <resources>
     <attr name="colorOnPrimaryVariantForSecondaryText" format="color" />
     <attr name="backgroundColor" format="color" />
+    <attr name="colorForEditBorders" format="color" />
 
 
 </resources>

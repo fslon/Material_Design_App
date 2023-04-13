@@ -18,6 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/search_wiki"
+            app:boxStrokeColor="@color/border_edit_color"
             app:counterEnabled="true"
             app:counterMaxLength="20"
             app:endIconCheckable="true"
@@ -27,16 +28,14 @@
             app:layout_constraintBottom_toTopOf="@+id/image_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
-
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_edit_text"
                 style="@style/TextInputEditTextCustom" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ru.geekbrains.materialdesignapp.EquilateralImageView
+        <ru.geekbrains.materialdesignapp.view.EquilateralImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?attr/colorPrimary"
         app:fabAlignmentMode="center"
         app:menu="@menu/bottom_app_bar_menu"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
@@ -64,7 +63,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
         app:tint="#FFFFFF" />

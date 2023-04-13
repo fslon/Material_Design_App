@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp
+package ru.geekbrains.materialdesignapp.view
 
 import android.content.Intent
 import android.net.Uri
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import ru.geekbrains.materialdesignapp.model.PictureOfTheDayData
+import ru.geekbrains.materialdesignapp.PictureOfTheDayViewModel
+import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.FragmentPictureOfTheDayBinding
 
 class PictureOfTheDayFragment : Fragment() {
