@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MaterialDesignApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MaterialDesignApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -19,7 +19,7 @@
 
     </style>
 
-    <style name="DarkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="DarkTheme" parent="Theme.MaterialDesignApp">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -39,7 +39,7 @@
         <!--        <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/teal_200</color>-->
     </style>
 
-    <style name="PinkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="PinkTheme" parent="Theme.MaterialDesignApp">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pink</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -55,7 +55,7 @@
 
     </style>
 
-    <style name="GreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="GreenTheme" parent="Theme.MaterialDesignApp">
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/green_primary_dark</item>
         <item name="colorAccent">@color/green_accent</item>
