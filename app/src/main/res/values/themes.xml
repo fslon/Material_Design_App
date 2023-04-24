@@ -40,17 +40,21 @@
 
     <style name="PinkTheme" parent="Theme.MaterialDesignApp">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/pink</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryVariant">@color/pinkPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/pinkOnPrimary</item>
+        <item name="colorOnPrimaryVariantForSecondaryText">@color/pinkOnPrimaryVariantForSecondaryText</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/pinkSecondary</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/pink_theme_on_secondary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="backgroundColor">@color/black</item>
+        <item name="backgroundColor">@color/pink_theme_background</item>
+
+        <item name="colorForEditBorders">@color/pinkForBorders</item>
+
 
     </style>
 
@@ -58,6 +62,21 @@
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/green_primary_dark</item>
         <item name="colorAccent">@color/green_accent</item>
+
+        <item name="colorPrimaryVariant">@color/green_theme_primary_variant</item>
+        <item name="colorOnPrimary">@color/green_theme_on_primary</item>
+        <item name="colorOnPrimaryVariantForSecondaryText">@color/green_theme_on_primary_variant_for_secondary_text</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green_theme_secondary</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/green_theme_on_secondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="backgroundColor">@color/white</item>
+
+        <item name="colorForEditBorders">@color/green_theme_for_borders</item>
+
     </style>
 
 
