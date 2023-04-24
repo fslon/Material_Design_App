@@ -11,7 +11,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="color_gray">#66000000</color>
+    <color name="color_gray">#3A3A3A</color>
 
     <color name="color_for_edit_borders">#11FF02</color>
 
@@ -20,6 +20,9 @@
     <color name="green_primary">#048100</color>
     <color name="green_primary_dark">#023900</color>
     <color name="green_accent">#AAFFA7</color>
+
+
+    <color name="gray_light">#BABABA</color>
 
 
 </resources>

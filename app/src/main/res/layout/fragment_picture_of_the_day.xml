@@ -18,6 +18,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/search_wiki"
+            android:textColorHint="?attr/colorOnPrimaryVariantForSecondaryText"
+
+            app:helperTextTextColor="?attr/colorOnPrimaryVariantForSecondaryText"
+            app:counterTextColor="?attr/colorOnPrimaryVariantForSecondaryText"
+
             app:boxStrokeColor="@color/border_edit_color"
             app:counterEnabled="true"
             app:counterMaxLength="20"
