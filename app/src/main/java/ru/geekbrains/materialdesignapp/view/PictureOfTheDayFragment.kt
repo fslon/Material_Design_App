@@ -64,6 +64,10 @@ class PictureOfTheDayFragment : Fragment() {
 
 //                activity.supportFragmentManager.beginTransaction().replace(R.id.container, settingsFragment).commitAllowingStateLoss()
             }
+            R.id.planets -> {
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, PlanetsFragment())?.addToBackStack("")
+                    ?.commit()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
