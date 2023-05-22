@@ -98,5 +98,11 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
+        <item name="tabTextColor">?colorOnPrimaryVariantForSecondaryText</item>
+        <item name="tabSelectedTextColor">?colorSecondary</item>
+
+    </style>
+
 
 </resources>
