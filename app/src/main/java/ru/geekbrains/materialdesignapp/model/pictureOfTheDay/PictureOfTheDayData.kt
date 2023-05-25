@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp.model
+package ru.geekbrains.materialdesignapp.model.pictureOfTheDay
 
 sealed class PictureOfTheDayData {
     data class Success(val serverResponseData: PODServerResponseData) :

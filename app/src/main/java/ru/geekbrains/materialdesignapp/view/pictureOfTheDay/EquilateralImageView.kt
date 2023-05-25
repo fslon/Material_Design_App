@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp.view
+package ru.geekbrains.materialdesignapp.view.pictureOfTheDay
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package ru.geekbrains.materialdesignapp.view
+package ru.geekbrains.materialdesignapp.view.planets
 
 import android.os.Bundle
 import android.view.LayoutInflater

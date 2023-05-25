@@ -42,7 +42,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ru.geekbrains.materialdesignapp.view.EquilateralImageView
+        <ru.geekbrains.materialdesignapp.view.pictureOfTheDay.EquilateralImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,20 +1,19 @@
-package ru.geekbrains.materialdesignapp.view
+package ru.geekbrains.materialdesignapp.view.planets
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.geekbrains.materialdesignapp.databinding.FragmentMarsBinding
-import ru.geekbrains.materialdesignapp.databinding.FragmentPictureOfTheDayBinding
+import ru.geekbrains.materialdesignapp.databinding.FragmentEarthBinding
 
-class MarsFragment : Fragment() {
-    private var _binding: FragmentMarsBinding? = null
+class EarthFragment : Fragment() {
+    private var _binding: FragmentEarthBinding? = null
     private val binding get() = _binding!!
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentMarsBinding.inflate(inflater, container, false)
+        _binding = FragmentEarthBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,6 +24,6 @@ class MarsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MarsFragment()
+        fun newInstance() = EarthFragment()
     }
 }

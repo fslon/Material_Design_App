@@ -3,9 +3,9 @@ package ru.geekbrains.materialdesignapp.viewmodel
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import ru.geekbrains.materialdesignapp.view.EarthFragment
-import ru.geekbrains.materialdesignapp.view.MarsFragment
-import ru.geekbrains.materialdesignapp.view.WeatherFragment
+import ru.geekbrains.materialdesignapp.view.planets.EarthFragment
+import ru.geekbrains.materialdesignapp.view.planets.MarsFragment
+import ru.geekbrains.materialdesignapp.view.planets.WeatherFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

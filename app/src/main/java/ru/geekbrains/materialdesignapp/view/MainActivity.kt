@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.ActivityMainBinding
+import ru.geekbrains.materialdesignapp.view.pictureOfTheDay.PictureOfTheDayFragment
 import ru.geekbrains.materialdesignapp.viewmodel.ThemeViewModel
 
 

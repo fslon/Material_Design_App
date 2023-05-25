@@ -1,9 +1,9 @@
-package ru.geekbrains.materialdesignapp.viewmodel
+package ru.geekbrains.materialdesignapp.viewmodel.pictureOfTheDay
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.geekbrains.materialdesignapp.model.PODServerResponseData
+import ru.geekbrains.materialdesignapp.model.pictureOfTheDay.PODServerResponseData
 
 interface PictureOfTheDayAPI {
     @GET("planetary/apod")
