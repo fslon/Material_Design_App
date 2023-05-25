@@ -10,3 +10,4 @@ interface PictureOfTheDayAPI {
     fun getPictureOfTheDay(@Query("api_key") apiKey: String):
             Call<PODServerResponseData>
 }
+
