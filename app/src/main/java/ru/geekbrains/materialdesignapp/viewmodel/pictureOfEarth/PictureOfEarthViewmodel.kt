@@ -1,5 +1,6 @@
 package ru.geekbrains.materialdesignapp.viewmodel.pictureOfEarth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.geekbrains.materialdesignapp.BuildConfig
 import ru.geekbrains.materialdesignapp.model.pictureOfEarth.POERetrofitImpl
-import ru.geekbrains.materialdesignapp.model.pictureOfEarth.POEServerResponseData
+import ru.geekbrains.materialdesignapp.model.pictureOfEarth.PhotoDTO
 import ru.geekbrains.materialdesignapp.model.pictureOfEarth.PictureOfEarthData
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 class PictureOfEarthViewmodel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfEarthData> =
@@ -28,12 +33,20 @@ class PictureOfEarthViewmodel(
         if (apiKey.isBlank()) {
             PictureOfEarthData.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object : Callback<POEServerResponseData> {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(getTodayDate()).enqueue(object : Callback<List<PhotoDTO>> {
                 override fun onResponse(
-                    call: Call<POEServerResponseData>,
-                    response: Response<POEServerResponseData>
+                    call: Call<List<PhotoDTO>>,
+                    response: Response<List<PhotoDTO>>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
+
+//                        response.body()!!.image
+                        Log.e("*********", response.body().toString())
+                        val list: List<PhotoDTO> = response.body()!!
+                        Log.e("222222", list[0].getImageUrl().toString())
+
+
+
                         liveDataForViewToObserve.value = PictureOfEarthData.Success(response.body()!!)
                     } else {
                         val message = response.message()
@@ -52,7 +65,7 @@ class PictureOfEarthViewmodel(
                 }
 
                 override fun onFailure(
-                    call: Call<POEServerResponseData>, t:
+                    call: Call<List<PhotoDTO>>, t:
                     Throwable
                 ) {
                     liveDataForViewToObserve.value = PictureOfEarthData.Error(t)
@@ -60,4 +73,19 @@ class PictureOfEarthViewmodel(
             })
         }
     }
+
+    private fun getTodayDate(): String {
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern(("yyyy-MM-dd"))
+        val dateNow = current.format(formatter)
+        val date = LocalDate.parse(dateNow)
+        val period = Period.of(0, 0, 5)
+        val modifiedDate = date.minus(period)
+        return modifiedDate.format(formatter)
+
+//        return "${current.year}-${current.monthValue.}-${current.dayOfMonth - 5}"
+//        return "${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH) + 1}/${calendar.get(Calendar.DAY_OF_MONTH)}"
+    }
+
 }

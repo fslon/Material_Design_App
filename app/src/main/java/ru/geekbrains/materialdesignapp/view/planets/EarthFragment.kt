@@ -33,23 +33,18 @@ class EarthFragment : Fragment() {
     private fun renderData(data: PictureOfEarthData) {
         when (data) {
             is PictureOfEarthData.Success -> {
-                val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
-                val explanation = serverResponseData.explanation
 
-                if (url.isNullOrEmpty()) {
+                if (data.serverResponseData[0].getImageUrl().isEmpty()) {
                     toast("Link is empty")//Отобразите ошибку
                     // showError("Сообщение, что ссылка пустая")
 
                 } else {
-                    binding.earthImage.load(url) {
+                    binding.earthImage.load(data.serverResponseData[0].getImageUrl()) {
                         lifecycle(this@EarthFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
                     }
-
-//                    setExplanation(explanation) // добавление описания для фото в bottomSheet // TODO
                 }
             }
             is PictureOfEarthData.Loading -> {
@@ -60,7 +55,7 @@ class EarthFragment : Fragment() {
 //Отобразите ошибку
 //showError(data.error.message)
                 toast(data.error.message)
-                Log.e("///////", data.error.message.toString() )
+                Log.e("///////", data.error.message.toString())
             }
         }
     }

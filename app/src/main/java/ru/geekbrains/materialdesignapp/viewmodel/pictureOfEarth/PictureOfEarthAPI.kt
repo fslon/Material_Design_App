@@ -2,12 +2,12 @@ package ru.geekbrains.materialdesignapp.viewmodel.pictureOfEarth
 
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
-import ru.geekbrains.materialdesignapp.model.pictureOfEarth.POEServerResponseData
+import retrofit2.http.Path
+import ru.geekbrains.materialdesignapp.model.pictureOfEarth.PhotoDTO
 
 interface PictureOfEarthAPI {
-    @GET("natural/images")
-    fun getPictureOfTheDay(@Query("api_key") apiKey: String):
-            Call<POEServerResponseData>
+    @GET("EPIC/api/enhanced/date/{date}")
+    fun getPictureOfTheDay(@Path("date") date: String):
+            Call<List<PhotoDTO>>
 }
 

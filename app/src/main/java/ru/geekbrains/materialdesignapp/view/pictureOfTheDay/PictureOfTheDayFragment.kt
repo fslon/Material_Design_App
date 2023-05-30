@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import ru.geekbrains.materialdesignapp.model.pictureOfTheDay.PictureOfTheDayData
-import ru.geekbrains.materialdesignapp.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.FragmentPictureOfTheDayBinding
+import ru.geekbrains.materialdesignapp.model.pictureOfTheDay.PictureOfTheDayData
 import ru.geekbrains.materialdesignapp.view.MainActivity
 import ru.geekbrains.materialdesignapp.view.SettingsFragment
 import ru.geekbrains.materialdesignapp.view.planets.PlanetsFragment
+import ru.geekbrains.materialdesignapp.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
