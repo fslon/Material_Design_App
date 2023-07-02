@@ -14,4 +14,10 @@
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/animations"
+        android:icon="@drawable/ic_baseline_do_not_touch_24"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
+
 </menu>
