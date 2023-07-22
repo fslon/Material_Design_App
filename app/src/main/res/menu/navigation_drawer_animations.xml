@@ -5,15 +5,15 @@
         android:title="@string/animations">
         <menu>
             <item
-                android:id="@+id/first"
-                android:title="@string/first"
+                android:id="@+id/fade"
+                android:title="@string/fade"
                 android:checkable="true"/>
             <item
                 android:id="@+id/slide"
                 android:title="@string/slide"
                 android:checkable="true"/>
             <item
-                android:id="@+id/expode"
+                android:id="@+id/explode"
                 android:title="@string/explode"
                 android:checkable="true"/>
         </menu>

@@ -2,14 +2,13 @@ package ru.geekbrains.materialdesignapp.view
 
 import android.os.Bundle
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.BottomAppBarBinding
@@ -36,41 +35,59 @@ class AnimationsFragment : Fragment() {
             textIsVisible = !textIsVisible
             binding.text.visibility = if (textIsVisible) View.VISIBLE else View.GONE
         }
-
         initToolbarAndDrawer()
+
+
     }
 
 
     private fun initToolbarAndDrawer() {
         val toolbar = binding.toolbar
-//        setSupportActionBar(toolbar)
-        initDrawer(toolbar)
+        toolbar.bottomAppBar.menu.clear() // скрывает ненужные кнопки на тулбаре
+
+        toolbar.bottomAppBar.setNavigationOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
+
+        initDrawer()
     }
 
-    private fun initDrawer(toolbar: BottomAppBarBinding) {
-        toggle = ActionBarDrawerToggle(activity, binding.drawerLayout, R.string.open_drawer_anim, R.string.close_drawer_anim )
+    private fun initDrawer() {
+        toggle = ActionBarDrawerToggle(activity, binding.drawerLayout, R.string.open_drawer_anim, R.string.close_drawer_anim)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navigationView.setNavigationItemSelectedListener {
+        binding.navigationView.setCheckedItem(R.id.fade) // при инициализации подсвечивается элемент (первый) в navigationView
 
-            when(it.itemId){
-                R.id.first -> {
-                    Toast.makeText(requireContext(), "шоуашшу", Toast.LENGTH_SHORT).show()
-                    Log.e("аыуаы", "initDrawer:11111111" )
+        binding.navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.fade -> {
+                    navigationViewButtonsAction("fade")
                 }
+                R.id.slide -> {
+                    navigationViewButtonsAction("slide")
+                }
+                R.id.explode -> {
+                    navigationViewButtonsAction("explode")
+                }
+
             }
             true
+
         }
+
     }
 
+    private fun navigationViewButtonsAction(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+        binding.drawerLayout.closeDrawers()
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             true
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -16,7 +16,7 @@
     <string name="choose_theme">Выберите тему для приложения</string>
 
     <string name="planets">Планеты</string>
-    <string name="first">First</string>
+    <string name="fade">Fade</string>
     <string name="animations">Animations</string>
     <string name="slide">Slide</string>
     <string name="explode">Explode</string>
