@@ -20,6 +20,14 @@
     <string name="animations">Animations</string>
     <string name="slide">Slide</string>
     <string name="explode">Explode</string>
+    <string name="increase">Increase</string>
+    <string name="trajectory_movement">Trajectory movement</string>
+    <string name="shuffle_objects">Shuffle objects</string>
+    <string name="object_animator">ObjectAnimator and View.animate</string>
+    <string name="state_list_animator">StateListAnimator</string>
+    <string name="constraint_layout_and_constraint_set">ConstraintLayout и ConstraintSet</string>
+    <string name="additional_possibilities">Обзор дополнительных возможностей Material Design Components (MDC)</string>
+
 
     <string name="open_drawer_anim">open</string>
     <string name="close_drawer_anim">close</string>

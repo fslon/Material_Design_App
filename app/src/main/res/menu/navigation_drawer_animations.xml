@@ -6,16 +6,48 @@
         <menu>
             <item
                 android:id="@+id/fade"
-                android:title="@string/fade"
-                android:checkable="true"/>
+                android:checkable="true"
+                android:title="@string/fade" />
             <item
                 android:id="@+id/slide"
-                android:title="@string/slide"
-                android:checkable="true"/>
+                android:checkable="true"
+                android:title="@string/slide" />
             <item
                 android:id="@+id/explode"
-                android:title="@string/explode"
-                android:checkable="true"/>
+                android:checkable="true"
+                android:title="@string/explode" />
+            <item
+                android:id="@+id/increase"
+                android:checkable="true"
+                android:title="@string/increase" />
+            <item
+                android:id="@+id/trajectory_movement"
+                android:checkable="true"
+                android:title="@string/trajectory_movement" />
+            <item
+                android:id="@+id/shuffle_objects"
+                android:checkable="true"
+                android:title="@string/shuffle_objects" />
+            <item
+                android:id="@+id/object_animator_for_drawer"
+                android:checkable="true"
+                android:title="@string/object_animator" />
+
+            <item
+                android:id="@+id/state_list_animator_for_drawer"
+                android:checkable="true"
+                android:title="@string/state_list_animator" />
+
+            <item
+                android:id="@+id/constraint_layout_and_constraint_set"
+                android:checkable="true"
+                android:title="@string/constraint_layout_and_constraint_set" />
+            <item
+                android:id="@+id/additional_possibilities"
+                android:checkable="true"
+                android:title="@string/additional_possibilities" />
+
+
         </menu>
     </item>
 </menu>
