@@ -1,16 +1,17 @@
 package ru.geekbrains.materialdesignapp.view
 
+import android.graphics.Rect
 import android.os.Bundle
-import android.transition.TransitionManager
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.transition.*
+import android.view.*
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.databinding.FragmentAnimationsBinding
 
@@ -22,6 +23,9 @@ class AnimationsFragment : Fragment() {
     private var textIsVisible = false
 
     lateinit var toggle: ActionBarDrawerToggle
+
+    lateinit var explodeLayout: ConstraintLayout
+    lateinit var recyclerViewExplodeLayout: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAnimationsBinding.inflate(inflater, container, false)
@@ -75,7 +79,7 @@ class AnimationsFragment : Fragment() {
                     fadeLayout.getViewById(R.id.fade_button).setOnClickListener {
                         TransitionManager.beginDelayedTransition(binding.animationsContainer)
                         textIsVisible = !textIsVisible
-                        fadeLayout.getViewById(R.id.slide_text).visibility = if (textIsVisible) View.VISIBLE else View.GONE
+                        fadeLayout.getViewById(R.id.fade_text).visibility = if (textIsVisible) View.VISIBLE else View.GONE
                     }
                 }
                 R.id.slide -> {
@@ -91,7 +95,7 @@ class AnimationsFragment : Fragment() {
                     )
 
                     slideLayout.getViewById(R.id.slide_button).setOnClickListener {
-                        TransitionManager.beginDelayedTransition(binding.animationsContainer)
+                        TransitionManager.beginDelayedTransition(binding.transitionsContainer, Slide(Gravity.END))
                         textIsVisible = !textIsVisible
                         slideLayout.getViewById(R.id.slide_text).visibility = if (textIsVisible) View.VISIBLE else View.GONE
                     }
@@ -101,18 +105,16 @@ class AnimationsFragment : Fragment() {
 
                     binding.animationsContainer.removeAllViews()
 
-                    val explodeLayout: ConstraintLayout = layoutInflater.inflate(R.layout.transition_explode_layout, null) as ConstraintLayout
+                    explodeLayout = layoutInflater.inflate(R.layout.transition_explode_layout, null) as ConstraintLayout
                     binding.animationsContainer.addView(
                         explodeLayout,
                         ConstraintLayout.LayoutParams.MATCH_PARENT,
                         ConstraintLayout.LayoutParams.MATCH_PARENT
                     )
 
-                    explodeLayout.getViewById(R.id.explode_button).setOnClickListener {
-                        TransitionManager.beginDelayedTransition(binding.animationsContainer)
-                        textIsVisible = !textIsVisible
-                        explodeLayout.getViewById(R.id.explode_text).visibility = if (textIsVisible) View.VISIBLE else View.GONE
-                    }
+                    recyclerViewExplodeLayout = explodeLayout.getViewById(R.id.recycler_view_explode) as RecyclerView
+                    recyclerViewExplodeLayout.adapter = Adapter()
+
                 }
 
                 R.id.increase -> {
@@ -127,11 +129,26 @@ class AnimationsFragment : Fragment() {
                         ConstraintLayout.LayoutParams.MATCH_PARENT
                     )
 
-                    increaseLayout.getViewById(R.id.increase_button).setOnClickListener {
-                        TransitionManager.beginDelayedTransition(binding.animationsContainer)
-                        textIsVisible = !textIsVisible
-                        increaseLayout.getViewById(R.id.increase_text).visibility = if (textIsVisible) View.VISIBLE else View.GONE
+                    val frameLayoutIncrease = increaseLayout.getViewById(R.id.transition_increase_container) as FrameLayout
+                    val imageViewIncreaseLayout = frameLayoutIncrease.findViewById<ImageView>(R.id.transition_increase_image_view)
+                    var isExpanded = false
+
+                    imageViewIncreaseLayout.setOnClickListener {
+                        isExpanded = !isExpanded
+                        TransitionManager.beginDelayedTransition(
+                            frameLayoutIncrease, TransitionSet()
+                                .addTransition(ChangeBounds())
+                                .addTransition(ChangeImageTransform())
+                        )
+                        val params: ViewGroup.LayoutParams = imageViewIncreaseLayout.layoutParams
+                        params.height =
+                            if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        imageViewIncreaseLayout.layoutParams = params
+                        imageViewIncreaseLayout.scaleType = if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
                     }
+
+
                 }
 
                 R.id.trajectory_movement -> {
@@ -268,6 +285,33 @@ class AnimationsFragment : Fragment() {
 
     }
 
+    private fun explode(clickedView: View) {
+        val viewRect = Rect()
+        clickedView.getGlobalVisibleRect(viewRect)
+        val explode = Explode()
+        explode.epicenterCallback = object : Transition.EpicenterCallback() {
+            override fun onGetEpicenter(transition: Transition): Rect {
+                return viewRect
+            }
+        }
+        explode.duration = 1000
+
+        val set = TransitionSet()
+            .addTransition(explode)
+            .addTransition(Fade().addTarget(clickedView))
+            .addListener(object : TransitionListenerAdapter() {
+                override fun onTransitionEnd(transition: Transition) {
+                    transition.removeListener(this)
+//                    requireActivity().onBackPressed()
+                }
+            })
+
+
+        TransitionManager.beginDelayedTransition(recyclerViewExplodeLayout, set)
+        recyclerViewExplodeLayout.adapter = null
+    }
+
+
     private fun navigationViewButtonsAction(text: String) {   // при нажатии кнопки в navigationView
         Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
 
@@ -290,4 +334,30 @@ class AnimationsFragment : Fragment() {
     companion object {
         fun newInstance() = AnimationsFragment()
     }
+
+    private inner class Adapter : RecyclerView.Adapter<ViewHolder>() { // для explode animation
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            return ViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.transition_explode_recycle_view_item,
+                    parent,
+                    false
+                ) as View
+            )
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            holder.itemView.setOnClickListener {
+                explode(it)
+            }
+        }
+
+        override fun getItemCount(): Int {
+            return 32
+        }
+    }
+
+    private inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
+
+
