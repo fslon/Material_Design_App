@@ -7,9 +7,11 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.transition.*
 import android.view.*
+import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.widget.NestedScrollView
@@ -42,6 +44,9 @@ class AnimationsFragment : Fragment() {
     lateinit var scrollViewObjectAnimator: NestedScrollView
     lateinit var toolbarObjectAnimator: FrameLayout
 
+    lateinit var containerConstraintSet : ConstraintLayout
+    lateinit var backgroundImageConstraintSet : ImageView
+    private var show = false
 
     private var _binding: FragmentAnimationsBinding? = null
     private val binding get() = _binding!!
@@ -303,19 +308,22 @@ class AnimationsFragment : Fragment() {
                     binding.animationsContainer.removeAllViews()
 
                     val transitionConstraintSetLayout: ConstraintLayout =
-                        layoutInflater.inflate(R.layout.transition_constraint_set_layout, null) as ConstraintLayout
+                        layoutInflater.inflate(R.layout.transition_constraint_set_layout_start, null) as ConstraintLayout
                     binding.animationsContainer.addView(
                         transitionConstraintSetLayout,
                         ConstraintLayout.LayoutParams.MATCH_PARENT,
                         ConstraintLayout.LayoutParams.MATCH_PARENT
                     )
 
-                    transitionConstraintSetLayout.getViewById(R.id.constraint_layout_and_constraint_set_button).setOnClickListener {
-                        TransitionManager.beginDelayedTransition(binding.animationsContainer)
-                        textIsVisible = !textIsVisible
-                        transitionConstraintSetLayout.getViewById(R.id.constraint_layout_and_constraint_set_text).visibility =
-                            if (textIsVisible) View.VISIBLE else View.GONE
+                    containerConstraintSet = transitionConstraintSetLayout.findViewById(R.id.constraint_layout_constraint_container) as ConstraintLayout
+                    backgroundImageConstraintSet =
+                        containerConstraintSet.findViewById(R.id.constraint_layout_backgroundImage) as ImageView
+
+                    backgroundImageConstraintSet.setOnClickListener {
+                        if (show) hideComponents() else
+                            showComponents()
                     }
+
                 }
 
                 R.id.additional_possibilities -> {
@@ -499,6 +507,35 @@ class AnimationsFragment : Fragment() {
                     transparentBackgroundObjectAnimator.isClickable = false
                 }
             })
+    }
+
+    private fun showComponents() {
+        show = true
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(requireContext(), R.layout.transition_constraint_set_layout_end)
+        val transition = ChangeBounds()
+        transition.interpolator = AnticipateOvershootInterpolator(1.0f)
+        transition.duration = 1200
+        TransitionManager.beginDelayedTransition(
+            containerConstraintSet,
+            transition
+        )
+        constraintSet.applyTo(containerConstraintSet)
+    }
+
+
+    private fun hideComponents() {
+        show = false
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(requireContext(), R.layout.transition_constraint_set_layout_start)
+        val transition = ChangeBounds()
+        transition.interpolator = AnticipateOvershootInterpolator(1.0f)
+        transition.duration = 1200
+        TransitionManager.beginDelayedTransition(
+            containerConstraintSet,
+            transition
+        )
+        constraintSet.applyTo(containerConstraintSet)
     }
 
 
