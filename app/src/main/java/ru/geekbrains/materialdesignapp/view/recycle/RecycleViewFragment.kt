@@ -23,6 +23,7 @@ class RecycleViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
+            Data(Data.TYPE_HEADER, "Header"),
             Data(Data.TYPE_EARTH, "Earth"),
             Data(Data.TYPE_EARTH, "Earth"),
             Data(Data.TYPE_EARTH, "Earth"),
