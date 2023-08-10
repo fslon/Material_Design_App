@@ -15,6 +15,7 @@
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_wikipedia.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/swipe_indicator_active.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/activity_recycler_item_earth.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/bottom_app_bar.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.3509963768115942" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_animations.xml" value="0.358695652173913" />
@@ -24,6 +25,8 @@
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_picture_of_the_day.xml" value="0.33" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_picture_of_the_day_start.xml" value="0.31007751937984496" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_planets.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycle_view.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycler_item_mars.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_weather.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_weather2.xml" value="0.17395833333333333" />
@@ -32,6 +35,7 @@
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_additional_possibilities_layout.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_constraint_set_layout.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_constraint_set_layout_end.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_constraint_set_layout_start.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_explode_layout.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_explode_recycle_view_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/transition_fade_layout.xml" value="0.358695652173913" />

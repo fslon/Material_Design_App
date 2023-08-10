@@ -3,21 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/planets"
+        android:id="@+id/planets_menu"
         android:icon="@drawable/ic_baseline_sports_volleyball_24"
         android:title="@string/planets"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settings_menu"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/animations"
+        android:id="@+id/animations_menu"
         android:icon="@drawable/ic_baseline_do_not_touch_24"
-        android:title="@string/settings"
+        android:title="@string/animations_rus"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/recycler_view_menu"
+        android:icon="@drawable/ic_baseline_directions_bike_24"
+        android:title="@string/recycler_view"
         app:showAsAction="ifRoom" />
 
 </menu>

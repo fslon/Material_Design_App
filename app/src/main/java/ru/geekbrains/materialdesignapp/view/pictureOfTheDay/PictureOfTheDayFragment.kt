@@ -16,6 +16,7 @@ import ru.geekbrains.materialdesignapp.databinding.FragmentPictureOfTheDayStartB
 import ru.geekbrains.materialdesignapp.model.pictureOfTheDay.PictureOfTheDayData
 import ru.geekbrains.materialdesignapp.view.AnimationsFragment
 import ru.geekbrains.materialdesignapp.view.MainActivity
+import ru.geekbrains.materialdesignapp.view.recycle.RecycleViewFragment
 import ru.geekbrains.materialdesignapp.view.SettingsFragment
 import ru.geekbrains.materialdesignapp.view.planets.PlanetsFragment
 import ru.geekbrains.materialdesignapp.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
@@ -61,17 +62,21 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.settings -> {
+            R.id.settings_menu -> {
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack("")
                     ?.commit()
 //                activity.supportFragmentManager.beginTransaction().replace(R.id.container, settingsFragment).commitAllowingStateLoss()
             }
-            R.id.planets -> {
+            R.id.planets_menu -> {
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, PlanetsFragment())?.addToBackStack("")
                     ?.commit()
             }
-            R.id.animations -> {
+            R.id.animations_menu -> {
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, AnimationsFragment())?.addToBackStack("")
+                    ?.commit()
+            }
+            R.id.recycler_view_menu -> {
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, RecycleViewFragment())?.addToBackStack("")
                     ?.commit()
             }
         }
