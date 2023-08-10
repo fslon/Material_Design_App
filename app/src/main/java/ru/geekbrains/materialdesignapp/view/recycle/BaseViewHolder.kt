@@ -5,5 +5,5 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.materialdesignapp.model.recycler.Data
 
 abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    abstract fun bind(data: Data)
+    abstract fun bind(data: Pair<Data, Boolean>)
 }

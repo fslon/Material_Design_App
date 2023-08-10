@@ -13,9 +13,10 @@ import ru.geekbrains.materialdesignapp.model.recycler.Data.Companion.TYPE_MARS
 
 class RecycleFragmentAdapter(
     private var onListItemClickListener: RecycleViewFragment.OnListItemClickListener,
-    private var data: MutableList<Data>
+    private var data: MutableList<Pair<Data, Boolean>>
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             BaseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,12 +42,13 @@ class RecycleFragmentAdapter(
 
     }
 
+
     override fun getItemCount(): Int {
         return data.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return data[position].type
+        return data[position].first.type
     }
 
     fun appendItem() {
@@ -54,30 +56,66 @@ class RecycleFragmentAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem() = Data(TYPE_MARS, "Mars", "")
+    private fun generateItem() = Pair(Data(TYPE_MARS, "Mars", ""), false)
+//    private fun generateItem() = Data(TYPE_MARS, "Mars", "")
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+
+
+        override fun bind(data: Pair<Data, Boolean>) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.findViewById<TextView>(R.id.descriptionTextView).text =
-                    data.someDescription
+                    data.first.someDescription
                 itemView.findViewById<ImageView>(R.id.wikiImageView).setOnClickListener {
-                    onListItemClickListener.onItemClick(data)
+                    onListItemClickListener.onItemClick(data.first)
                 }
             }
         }
     }
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data, Boolean>) {
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
-                onListItemClickListener.onItemClick(data)
+                onListItemClickListener.onItemClick(data.first)
             }
             itemView.findViewById<ImageView>(R.id.addItemImageView).setOnClickListener {
                 addItem()
             }
             itemView.findViewById<ImageView>(R.id.removeItemImageView).setOnClickListener { removeItem() }
+
+            itemView.findViewById<ImageView>(R.id.moveItemDown).setOnClickListener {
+                moveDown()
+            }
+            itemView.findViewById<ImageView>(R.id.moveItemUp).setOnClickListener {
+                moveUp()
+            }
+
+            itemView.findViewById<TextView>(R.id.marsDescriptionTextView).visibility =
+                if (data.second) View.VISIBLE else View.GONE
+            itemView.findViewById<TextView>(R.id.marsTextView).setOnClickListener {
+                toggleText()
+            }
+
         }
+
+        private fun moveUp() {
+            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition - 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition - 1)
+            }
+        }
+
+        private fun moveDown() {
+            layoutPosition.takeIf { it < data.size - 1 }?.also { currentPosition ->
+                data.removeAt(currentPosition).apply {
+                    data.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
+            }
+        }
+
 
         private fun addItem() {
             data.add(layoutPosition, generateItem())
@@ -89,12 +127,18 @@ class RecycleFragmentAdapter(
             notifyItemRemoved(layoutPosition)
         }
 
+        private fun toggleText() {
+            data[layoutPosition] = data[layoutPosition].let {
+                it.first to !it.second
+            }
+            notifyItemChanged(layoutPosition)
+        }
 
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
-            itemView.setOnClickListener { onListItemClickListener.onItemClick(data) }
+        override fun bind(data: Pair<Data, Boolean>) {
+            itemView.setOnClickListener { onListItemClickListener.onItemClick(data.first) }
         }
     }
 

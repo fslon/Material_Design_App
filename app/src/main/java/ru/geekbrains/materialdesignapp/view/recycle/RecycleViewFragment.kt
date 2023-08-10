@@ -23,8 +23,10 @@ class RecycleViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Data(Data.TYPE_MARS, "Mars", ""),
+            Pair(Data(Data.TYPE_HEADER, "Header", ""), false),
+            Pair(Data(Data.TYPE_MARS, "Mars", ""), false)
         )
+
         val adapter = RecycleFragmentAdapter(
             object : OnListItemClickListener {
                 override fun onItemClick(data: Data) {
