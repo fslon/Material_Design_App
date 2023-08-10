@@ -41,9 +41,9 @@ class PictureOfEarthViewmodel(
                     if (response.isSuccessful && response.body() != null) {
 
 //                        response.body()!!.image
-                        Log.e("*********", response.body().toString())
+//                        Log.e("*********", response.body().toString())
                         val list: List<PhotoDTO> = response.body()!!
-                        Log.e("222222", list[0].getImageUrl().toString())
+//                        Log.e("222222", list[0].getImageUrl().toString())
 
 
 
