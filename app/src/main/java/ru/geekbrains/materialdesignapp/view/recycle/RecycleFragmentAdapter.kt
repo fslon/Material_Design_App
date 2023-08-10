@@ -13,7 +13,7 @@ import ru.geekbrains.materialdesignapp.model.recycler.Data.Companion.TYPE_MARS
 
 class RecycleFragmentAdapter(
     private var onListItemClickListener: RecycleViewFragment.OnListItemClickListener,
-    private var data: List<Data>
+    private var data: MutableList<Data>
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -49,6 +49,12 @@ class RecycleFragmentAdapter(
         return data[position].type
     }
 
+    fun appendItem() {
+        data.add(generateItem())
+        notifyItemInserted(itemCount - 1)
+    }
+
+    private fun generateItem() = Data(TYPE_MARS, "Mars", "")
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
         override fun bind(data: Data) {
@@ -67,7 +73,23 @@ class RecycleFragmentAdapter(
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
                 onListItemClickListener.onItemClick(data)
             }
+            itemView.findViewById<ImageView>(R.id.addItemImageView).setOnClickListener {
+                addItem()
+            }
+            itemView.findViewById<ImageView>(R.id.removeItemImageView).setOnClickListener { removeItem() }
         }
+
+        private fun addItem() {
+            data.add(layoutPosition, generateItem())
+            notifyItemInserted(layoutPosition)
+        }
+
+        private fun removeItem() {
+            data.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
+        }
+
+
     }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {

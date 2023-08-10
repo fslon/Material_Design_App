@@ -23,30 +23,19 @@ class RecycleViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Data(Data.TYPE_HEADER, "Header"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
             Data(Data.TYPE_MARS, "Mars", ""),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_EARTH, "Earth"),
-            Data(Data.TYPE_MARS, "Mars", null)
         )
-        binding.recyclerView.adapter = RecycleFragmentAdapter(
+        val adapter = RecycleFragmentAdapter(
             object : OnListItemClickListener {
                 override fun onItemClick(data: Data) {
-                    Toast.makeText(
-                        requireContext(), data.someText,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), data.someText,
+                        Toast.LENGTH_SHORT).show()
                 }
             },
             data
         )
+        binding.recyclerView.adapter = adapter
+        binding.recyclerActivityFAB.setOnClickListener { adapter.appendItem() }
     }
 
     override fun onDestroyView() {
