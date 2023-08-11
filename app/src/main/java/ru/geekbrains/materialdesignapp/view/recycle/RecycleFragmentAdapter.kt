@@ -1,5 +1,6 @@
 package ru.geekbrains.materialdesignapp.view.recycle
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ class RecycleFragmentAdapter(
     private var onListItemClickListener: RecycleViewFragment.OnListItemClickListener,
     private var data: MutableList<Pair<Data, Boolean>>
 ) :
-    RecyclerView.Adapter<BaseViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             BaseViewHolder {
@@ -40,6 +41,21 @@ class RecycleFragmentAdapter(
             )
         }
 
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        data.removeAt(fromPosition).apply {
+            data.add(
+                if (toPosition > fromPosition) toPosition - 1 else toPosition,
+                this
+            )
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 
@@ -73,7 +89,7 @@ class RecycleFragmentAdapter(
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bind(data: Pair<Data, Boolean>) {
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
                 onListItemClickListener.onItemClick(data.first)
@@ -98,8 +114,17 @@ class RecycleFragmentAdapter(
 
         }
 
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+
+
         private fun moveUp() {
-            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+            layoutPosition.takeIf { it > 0 }?.also { currentPosition ->
                 data.removeAt(currentPosition).apply {
                     data.add(currentPosition - 1, this)
                 }

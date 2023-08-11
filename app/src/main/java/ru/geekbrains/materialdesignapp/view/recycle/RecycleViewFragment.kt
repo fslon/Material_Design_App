@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import ru.geekbrains.materialdesignapp.databinding.FragmentRecycleViewBinding
 import ru.geekbrains.materialdesignapp.model.recycler.Data
 
@@ -23,7 +24,6 @@ class RecycleViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Pair(Data(Data.TYPE_HEADER, "Header", ""), false),
             Pair(Data(Data.TYPE_MARS, "Mars", ""), false)
         )
 
@@ -38,6 +38,9 @@ class RecycleViewFragment : Fragment() {
         )
         binding.recyclerView.adapter = adapter
         binding.recyclerActivityFAB.setOnClickListener { adapter.appendItem() }
+
+        ItemTouchHelper(ItemTouchHelperCallback(adapter))
+            .attachToRecyclerView(binding.recyclerView)
     }
 
     override fun onDestroyView() {
