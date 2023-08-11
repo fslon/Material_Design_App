@@ -2,6 +2,7 @@ package ru.geekbrains.materialdesignapp.view.recycle
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,7 +15,8 @@ import ru.geekbrains.materialdesignapp.model.recycler.Data.Companion.TYPE_MARS
 
 class RecycleFragmentAdapter(
     private var onListItemClickListener: RecycleViewFragment.OnListItemClickListener,
-    private var data: MutableList<Pair<Data, Boolean>>
+    private var data: MutableList<Pair<Data, Boolean>>,
+    private val dragListener: OnStartDragListener
 ) :
     RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
@@ -112,6 +114,14 @@ class RecycleFragmentAdapter(
                 toggleText()
             }
 
+            itemView.findViewById<ImageView>(R.id.dragHandleImageView).setOnTouchListener { _, event ->
+                if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                    dragListener.onStartDrag(this)
+                }
+                false
+            }
+
+
         }
 
         override fun onItemSelected() {
@@ -119,7 +129,7 @@ class RecycleFragmentAdapter(
         }
 
         override fun onItemClear() {
-            itemView.setBackgroundColor(0)
+            itemView.setBackgroundColor(Color.WHITE)
         }
 
 
