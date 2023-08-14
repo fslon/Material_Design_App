@@ -2,7 +2,7 @@ package ru.geekbrains.materialdesignapp.model.recycler
 
 data class Data(
     val type: Int = TYPE_EARTH,
-    val someText: String = "Text",
+    var someText: String = "Text",
     val someDescription: String? = "Description"
 ) {
     companion object {

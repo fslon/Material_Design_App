@@ -1,10 +1,7 @@
 package ru.geekbrains.materialdesignapp.view.recycle
 
 import android.graphics.Color
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -74,7 +71,7 @@ class RecycleFragmentAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateItem() = Pair(Data(TYPE_MARS, "Mars", ""), false)
+    private fun generateItem() = Pair(Data(TYPE_MARS, "", ""), false)
 //    private fun generateItem() = Data(TYPE_MARS, "Mars", "")
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
@@ -94,7 +91,8 @@ class RecycleFragmentAdapter(
     inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bind(data: Pair<Data, Boolean>) {
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
-                onListItemClickListener.onItemClick(data.first)
+//                onListItemClickListener.onItemClick(data.first)
+                toggleText()
             }
             itemView.findViewById<ImageView>(R.id.addItemImageView).setOnClickListener {
                 addItem()
@@ -110,9 +108,30 @@ class RecycleFragmentAdapter(
 
             itemView.findViewById<TextView>(R.id.marsDescriptionTextView).visibility =
                 if (data.second) View.VISIBLE else View.GONE
-            itemView.findViewById<TextView>(R.id.marsTextView).setOnClickListener {
-                toggleText()
-            }
+
+
+            val nameOfNoteTextView = itemView.findViewById<TextView>(R.id.marsTextView)
+
+            nameOfNoteTextView.text = getNameOfNote() // отображение названия заметки
+
+            nameOfNoteTextView.setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    // if the event is a key down event on the enter button
+                    if (event.action == KeyEvent.ACTION_DOWN &&
+                        keyCode == KeyEvent.KEYCODE_ENTER
+                    ) {
+                        data.first.someText = nameOfNoteTextView.text.toString() // запись нового названия в массив
+                        toggleTextForName(data, nameOfNoteTextView.text.toString()) // обновление элемента recycler
+
+                        // clear focus and hide cursor from edit text
+                        nameOfNoteTextView.clearFocus()
+                        nameOfNoteTextView.isCursorVisible = false
+
+                        return true
+                    }
+                    return false
+                }
+            })
 
             itemView.findViewById<ImageView>(R.id.dragHandleImageView).setOnTouchListener { _, event ->
                 if (event.actionMasked == MotionEvent.ACTION_DOWN) {
@@ -168,6 +187,14 @@ class RecycleFragmentAdapter(
             }
             notifyItemChanged(layoutPosition)
         }
+
+        private fun toggleTextForName(dataElement: Pair<Data, Boolean>, name: String) {
+            data[layoutPosition].first.someText = name
+//            data[layoutPosition] = dataElement
+            notifyItemChanged(layoutPosition)
+        }
+
+        private fun getNameOfNote() = data[layoutPosition].first.someText // отображение названия заметки
 
     }
 

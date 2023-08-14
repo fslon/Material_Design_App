@@ -39,13 +39,29 @@
         app:srcCompat="@android:drawable/arrow_down_float" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--        android:id="@+id/marsTextView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/mars"-->
+    <!--        android:textSize="35sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/marsImageView"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/marsImageView"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/marsImageView" />-->
+
+    <EditText
         android:id="@+id/marsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mars"
-        android:textSize="35sp"
+        android:hint="@string/name_of_note"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:maxLength="15"
+        app:maxLines="1"
+        android:singleLine="true"
+
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/marsImageView"
         app:layout_constraintStart_toEndOf="@+id/marsImageView"
         app:layout_constraintTop_toTopOf="@+id/marsImageView" />
@@ -55,11 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Марс -- четвёртая по удалённости от Солнца и седьмая по размерам
-планета Солнечной системы. Названа в честь Марса -- древнеримского бога войны,
-соответствующего древнегреческому Аресу. Иногда Марс называют «красной планетой» из-за
-красноватого оттенка поверхности, придаваемого ей минералом маггемитом (оксидом
-железа)."
+        android:text="@string/description_of_note"
         android:textColor="#000"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

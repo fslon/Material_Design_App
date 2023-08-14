@@ -40,6 +40,8 @@
     <string name="mars">Марс</string>
     <string name="extra_text">Дополнительный текст</string>
     <string name="header">Заголовок</string>
+    <string name="name_of_note">Название заметки</string>
+    <string name="description_of_note">Дополнительный текст</string>
 
 
 </resources>

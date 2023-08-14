@@ -26,7 +26,7 @@ class RecycleViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val data = arrayListOf(
-            Pair(Data(Data.TYPE_MARS, "Mars", ""), false)
+            Pair(Data(Data.TYPE_MARS, "", ""), false)
         )
 
         val adapter = RecycleFragmentAdapter(
