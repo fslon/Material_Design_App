@@ -8,12 +8,14 @@
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/bg_earth.xml" value="0.2665" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.212" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_baseline_do_not_touch_24.xml" value="0.2665" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_baseline_done_24.xml" value="0.212" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_hamburger_menu_bottom_bar.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_load_error_vector.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_no_photo_vector.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_plus_fab.xml" value="0.212" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_send.xml" value="0.212" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/ic_wikipedia.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/drawable/swipe_indicator_active.xml" value="0.1935" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
@@ -28,6 +30,7 @@
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_picture_of_the_day_start.xml" value="0.31007751937984496" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_planets.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycle_view.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycler_item_earth.xml" value="0.358695652173913" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycler_item_header.xml" value="0.33" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_recycler_item_mars.xml" value="0.33" />
         <entry key="..\:/Users/ugwdc/AndroidStudioProjects/MaterialDesignApp/app/src/main/res/layout/fragment_settings.xml" value="0.33" />

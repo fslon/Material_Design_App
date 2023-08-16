@@ -2,6 +2,9 @@ package ru.geekbrains.materialdesignapp.view.recycle
 
 import android.graphics.Color
 import android.view.*
+import android.view.View.OnFocusChangeListener
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +12,7 @@ import ru.geekbrains.materialdesignapp.R
 import ru.geekbrains.materialdesignapp.model.recycler.Data
 import ru.geekbrains.materialdesignapp.model.recycler.Data.Companion.TYPE_EARTH
 import ru.geekbrains.materialdesignapp.model.recycler.Data.Companion.TYPE_MARS
+
 
 class RecycleFragmentAdapter(
     private var onListItemClickListener: RecycleViewFragment.OnListItemClickListener,
@@ -90,6 +94,11 @@ class RecycleFragmentAdapter(
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
         override fun bind(data: Pair<Data, Boolean>) {
+
+            val descriptionEditText = itemView.findViewById<EditText>(R.id.marsDescriptionEditText)
+            val nameOfNoteTextView = itemView.findViewById<TextView>(R.id.marsTextView)
+            val doneButton = itemView.findViewById<Button>(R.id.button_done_description)
+
             itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
 //                onListItemClickListener.onItemClick(data.first)
                 toggleText()
@@ -106,13 +115,10 @@ class RecycleFragmentAdapter(
                 moveUp()
             }
 
-            itemView.findViewById<TextView>(R.id.marsDescriptionTextView).visibility =
-                if (data.second) View.VISIBLE else View.GONE
-
-
-            val nameOfNoteTextView = itemView.findViewById<TextView>(R.id.marsTextView)
+            descriptionEditText.visibility = if (data.second) View.VISIBLE else View.GONE // показать описание если в массиве true
 
             nameOfNoteTextView.text = getNameOfNote() // отображение названия заметки
+            descriptionEditText.setText(getDescriptionOfNote())  // отображение названия заметки
 
             nameOfNoteTextView.setOnKeyListener(object : View.OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
@@ -140,7 +146,22 @@ class RecycleFragmentAdapter(
                 false
             }
 
+            descriptionEditText.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {  // показать кнопку если editText описания в фокусе
+                    doneButton.visibility = View.VISIBLE
 
+                    doneButton.setOnClickListener {
+                        data.first.someDescription = descriptionEditText.text.toString() // запись нового названия в массив
+                        toggleTextForDescription(data, descriptionEditText.text.toString()) // обновление элемента recycler
+
+                        descriptionEditText.clearFocus()
+                        descriptionEditText.isCursorVisible = false
+
+                    }
+                } else { // если не в фокусе то скрыть кнопку
+                    doneButton.visibility = View.GONE
+                }
+            }
         }
 
         override fun onItemSelected() {
@@ -194,7 +215,14 @@ class RecycleFragmentAdapter(
             notifyItemChanged(layoutPosition)
         }
 
+        private fun toggleTextForDescription(dataElement: Pair<Data, Boolean>, description: String) {
+            data[layoutPosition].first.someDescription = description
+            notifyItemChanged(layoutPosition)
+        }
+
         private fun getNameOfNote() = data[layoutPosition].first.someText // отображение названия заметки
+
+        private fun getDescriptionOfNote() = data[layoutPosition].first.someDescription // отображение названия заметки
 
     }
 
