@@ -1,8 +1,14 @@
 package ru.geekbrains.materialdesignapp.view.pictureOfTheDay
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -27,6 +33,8 @@ class PictureOfTheDayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    private lateinit var explanation: String
 
     //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -54,6 +62,66 @@ class PictureOfTheDayFragment : Fragment() {
 //        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         setBottomAppBar(view)
     }
+
+    private fun setSpansToExplanation() {
+        explanation = binding.textView.text.toString()
+        if (!explanation.isNullOrBlank()) {
+            //            Log.e("--------" , explanation.indexOf("Earth").toString())
+
+            getStartIndex("Earth")
+            getEndIndex("Earth")
+
+
+            val spannable = SpannableString(explanation)
+
+
+            val string1 = "Earth"
+            if (getStartIndex(string1) > -1) {
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.GREEN),
+                    getStartIndex(string1),
+                    getEndIndex(string1),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+
+            val string2 = "brighter"
+            if (getStartIndex(string2) > -1) {
+                spannable.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    getStartIndex(string2),
+                    getEndIndex(string2),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.BLACK),
+                    getStartIndex(string2),
+                    getEndIndex(string2),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+
+            val string3 = "ice"
+            if (getStartIndex(string3) > -1) {
+                spannable.setSpan(
+                    StyleSpan(Typeface.ITALIC),
+                    getStartIndex(string3),
+                    getEndIndex(string3),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.BLUE),
+                    getStartIndex(string3),
+                    getEndIndex(string3),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+
+            binding.textView.text = spannable
+
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -138,9 +206,14 @@ class PictureOfTheDayFragment : Fragment() {
             toast("Explanation is empty")
         } else {
             binding.textView.text = explanation
+
+            setSpansToExplanation()
         }
     }
 
+    private fun getStartIndex(word: String) = explanation.indexOf(word)    // получение индекса первой буквы в слове в описании к pod
+
+    private fun getEndIndex(word: String) = explanation.indexOf(word) + word.length   // получение индекса последней буквы в слове в описании к pod
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
