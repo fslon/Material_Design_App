@@ -16,9 +16,9 @@ import ru.geekbrains.materialdesignapp.databinding.FragmentPictureOfTheDayStartB
 import ru.geekbrains.materialdesignapp.model.pictureOfTheDay.PictureOfTheDayData
 import ru.geekbrains.materialdesignapp.view.AnimationsFragment
 import ru.geekbrains.materialdesignapp.view.MainActivity
-import ru.geekbrains.materialdesignapp.view.recycle.RecycleViewFragment
 import ru.geekbrains.materialdesignapp.view.SettingsFragment
 import ru.geekbrains.materialdesignapp.view.planets.PlanetsFragment
+import ru.geekbrains.materialdesignapp.view.recycle.RecycleViewFragment
 import ru.geekbrains.materialdesignapp.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 
@@ -110,7 +110,9 @@ class PictureOfTheDayFragment : Fragment() {
                         crossfade(true)
                     }
 
-                    setExplanation(explanation) // добавление описания для фото в bottomSheet
+                    setExplanation(explanation) // добавление описания под фото
+
+                    setExplanationBottomSheet(explanation) // добавление описания для фото в bottomSheet
                 }
             }
             is PictureOfTheDayData.Loading -> {
@@ -126,10 +128,19 @@ class PictureOfTheDayFragment : Fragment() {
 
     }
 
-    private fun setExplanation(explanation: String?) {
+    private fun setExplanationBottomSheet(explanation: String?) {
         val view: ConstraintLayout? = view?.findViewById(R.id.bottom_sheet_container)
         view?.findViewById<TextView>(R.id.bottomSheetDescription)?.text = explanation
     }
+
+    private fun setExplanation(explanation: String?) {
+        if (explanation.isNullOrEmpty()) {
+            toast("Explanation is empty")
+        } else {
+            binding.textView.text = explanation
+        }
+    }
+
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
